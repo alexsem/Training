@@ -17,28 +17,24 @@ let salarios = [{
     salario: 2000
 }];
 
-let getEmpleado = (id) => {
-    return new Promise((resolve, reject) => {
-        let empleadoDB = empleados.find(empleado => empleado.id === id);
+let getEmpleado = async(id) => {
+    let empleadoDB = empleados.find(empleado => empleado.id === id);
 
-        if (!empleadoDB) {
-            reject(`No existe el empleado con id ${id}`);
-        } else {
-            resolve(empleadoDB);
-        }
-    });
+    if (!empleadoDB) {
+        throw new Error(`No existe el empleado con id ${id}`);
+    } else {
+        return empleadoDB;
+    }
 }
 
-let getSalario = (empleado) => {
-    return new Promise((resolve, reject) => {
-        let salarioDB = salarios.find(salario => salario.id === empleado.id);
+let getSalario = async(empleado) => {
+    let salarioDB = salarios.find(salario => salario.id === empleado.id);
 
-        if (!salarioDB) {
-            reject(`No se encontro un salario para el usuario ${empleado.nombre}`);
-        } else {
-            resolve({ nombre: empleado.nombre, salario: salarioDB.salario });
-        }
-    });
+    if (!salarioDB) {
+        throw new Error(`No se encontro un salario para el usuario ${empleado.nombre}`);
+    } else {
+        return { nombre: empleado.nombre, salario: salarioDB.salario };
+    }
 }
 
 let getInformacion = async(id) => {
@@ -48,6 +44,6 @@ let getInformacion = async(id) => {
     return `El empleado ${resp.nombre} tiene un salario de ${resp.salario}`
 }
 
-getInformacion(3)
+getInformacion(1)
     .then(mensaje => console.log(mensaje))
     .catch(err => console.log(err));
