@@ -1,9 +1,12 @@
 // requires
 
 const fs = require('fs');
+const colors = require('colors');
+
 
 let listarTabla = (base, limite) => {
 
+    console.log('========================'.green)
     return new Promise((resolve, reject) => {
         if (!Number(base))
             return reject('La base no es un numero');
@@ -40,7 +43,7 @@ let crearArchivo = (base, limite) => {
             if (err)
                 reject(err);
             else
-                resolve(`./tablas/tabla_${base}.txt`);
+                resolve(`./tablas/tabla_${base}.txt`.green);
         });
     });
 
