@@ -2,7 +2,28 @@
 
 const fs = require('fs');
 
-let crearArchivo = (base) => {
+let listarTabla = (base, limite) => {
+
+    return new Promise((resolve, reject) => {
+        if (!Number(base))
+            return reject('La base no es un numero');
+
+        let data = ''
+
+        for (let i = 1; i <= limite; i++) {
+            data += `${base} * ${i} = ${base * i}\n`;
+        }
+
+        console.log(data, (err) => {
+            if (err)
+                reject(err)
+            else
+                resolve(data)
+        });
+    });
+}
+
+let crearArchivo = (base, limite) => {
 
     return new Promise((resolve, reject) => {
 
@@ -11,7 +32,7 @@ let crearArchivo = (base) => {
 
         let data = '';
 
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= limite; i++) {
             data += `${base} * ${i} = ${base * i}\n`;
         }
 
@@ -26,5 +47,6 @@ let crearArchivo = (base) => {
 }
 
 module.exports = {
-    crearArchivo
+    crearArchivo,
+    listarTabla
 }
